@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 import json
+import os
 from collections import Counter
 import matplotlib.pyplot as plt
 from datetime import datetime
 
 LOG_FILE = "cowrie.json"
+
+CHART_DIR = "charts"
+os.makedirs(CHART_DIR, exist_ok=True)
 
 events = []
 with open(LOG_FILE, "r") as f:
@@ -78,7 +82,7 @@ plt.xlabel("Count")
 plt.title("Top 10 Event Types Captured by Honeypot")
 plt.gca().invert_yaxis()
 plt.tight_layout()
-plt.savefig("chart_event_types.png")
+plt.savefig(os.path.join(CHART_DIR,"chart_event_types.png"))
 plt.close()
 print("\nSaved chart_event_types.png")
 
@@ -90,7 +94,7 @@ if usernames_tried:
     plt.title("Top Usernames Tried Against Honeypot")
     plt.xticks(rotation=30, ha="right")
     plt.tight_layout()
-    plt.savefig("chart_usernames.png")
+    plt.savefig(os.path.join(CHART_DIR,"chart_usernames.png"))
     plt.close()
     print("Saved chart_usernames.png")
 
@@ -102,7 +106,7 @@ if passwords_tried:
     plt.title("Top Passwords Tried Against Honeypot")
     plt.xticks(rotation=30, ha="right")
     plt.tight_layout()
-    plt.savefig("chart_passwords.png")
+    plt.savefig(os.path.join(CHART_DIR,"chart_passwords.png"))
     plt.close()
     print("Saved chart_passwords.png")
 
@@ -114,7 +118,7 @@ if command_counter:
     plt.title("Most Common Commands Run By Attacker(s)")
     plt.gca().invert_yaxis()
     plt.tight_layout()
-    plt.savefig("chart_commands.png")
+    plt.savefig(os.path.join(CHART_DIR,"chart_commands.png"))
     plt.close()
     print("Saved chart_commands.png")
 
@@ -136,7 +140,7 @@ if connections:
         plt.title("Timeline of Connection Attempts to Honeypot")
         plt.xticks(rotation=30, ha="right")
         plt.tight_layout()
-        plt.savefig("chart_timeline.png")
+        plt.savefig(os.path.join(CHART_DIR,"chart_timeline.png"))
         plt.close()
         print("Saved chart_timeline.png")
 
